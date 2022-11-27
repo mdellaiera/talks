@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Deep Unsupervised Domain Adaptation for the Cherenkov Telescope Array</title>
+		<meta name="description" content="2022">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- New slide -->
+				<section data-background="resources/lst_background.jpg">
+					<div class="container">
+						<div class="title" style="border-radius: 10px; background-color:rgba(0, 0, 0, 0.75);">
+							<h1>Deep Unsupervised Domain Adaptation for the Cherenkov Telescope Array</h1>
+							<h3>Deep learning thesis applied to astrophysics (GammaLearn)</h3>
+							
+							<table border="0">
+								<tr>
+								   <td><b style="font-size:30px">Author</b></td>
+								   <td><b style="font-size:30px">Under the supervision of</b></td>
+								</tr>
+								<tr>
+									<td>Michaël Dell'aiera</td>
+								   <td>Thomas Vuillaume (LAPP) <br> Alexandre Benoit (LISTIC)</td>
+								</tr>
+							</table>
+
+							<img src="/resources/logos.png"/>
+
+							michael.dellaiera@lapp.in2p3.fr
+						</div>
+					</div>
+				</section>
+
+
+				<section text-align: left>
+					<div align="left">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Presentation outline</p></h2>
+						<ul>
+							<li>Contextualisation, principle of detection, workflow</li>
+
+							<li>Deep Learning applied to CTA, preceding results</li>
+
+							<li class="fragment grow">Domain adaptation applied to CTA, preliminary results !</li>
+
+							<li>Conclusion, perspectives</li>
+						</ul> 
+					</div> 
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Gamma-ray astronomy</p></h2>
+						<p data-markdown style="text-align: left">
+							Study of the **high-energy gamma sources** in the Universe.
+
+							Inverse problem resolution : Given the telescope observations, how to recover the Energy, Direction and Type of the incoming particle ?
+
+							- Single telescope analysis (LST-1, CTA project)
+							- Particle classification : Gamma or Proton (maybe Electron ?)
+						</p>
+
+						<p float="left">
+							<img src="/resources/supernova.jpg" height="200" width="300" />
+							<img src="/resources/blackhole.jpg" height="200" width="300" /> 
+							<img src="/resources/darkmatter.jpg" height="200" width="300" />
+						</p>
+					</section>
+
+					<!-- New slide -->
+					<section data-background-video="resources/cta.mp4"></section>
+
+					<!-- New slide -->
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Principle of detection</p></h2>
+						<img src="/resources/principle_detection.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Workflow Hillas+RF</p></h2>
+						<img src="/resources/workflow.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Workflow γ-PhysNet</p></h2>
+						<img src="/resources/workflow_ml.png"/>
+					</section>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet</p></h2>
+						<img src="/resources/archi_vanilla.png"/>
+					</section>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Domain adaptation</p></h2>
+						<div data-markdown style="text-align: left">
+							<p style="text-align: left">Set of algorithms and techniques which aims to reduce domain discrepancies.</p>
+			
+							<p style="text-align: left">Expectations :
+			
+							- Better significance
+							- Robustly minimised discrepancies between MC and real data
+							- Improved spectrum reconstruction
+							- More detections at lower energies
+							</p>
+						</div>
+						<div style="position:relative; width:600; height:400px; margin:0 auto;">
+							<img data-src="resources/domain_confusion.png"/>
+						</div>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DANN</p></h2>
+						<img src="/resources/archi_dann.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DANN</p></h2>
+						<img src="/resources/archi_dann_1.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DANN</p></h2>
+						<img src="/resources/archi_dann_2.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DeepJDOT</p></h2>
+						<img src="/resources/archi_deepjdot.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DeepJDOT</p></h2>
+						<img src="/resources/archi_deepjdot_1.png"/>
+					</section>
+
+					<section data-transition="fade-in">
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >γ-PhysNet + DeepJDOT</p></h2>
+						<img src="/resources/archi_deepjdot_2.png"/>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Conclusion & Perspectives</p></h2>
+						<div data-markdown style="text-align: left">
+	         			- **Ultimate goal: Create an event map to localise gamma-ray sources**
+	        			  - Currently trying to reduce the discrepancy between MC and real data (unbalanced representation of the classes)
+	        
+						- **Working in parallel on:** 
+						  - Replace MC+P($\lambda)$ with real data (Markarian 501, Crab, ...)
+						  - The pointing direction between training data and observations
+						  - Introduction of physics knowledge (Physics-based deep learning)
+						
+						- **Future challenges:**
+						  - Stereoscopy ([Federated learning](https://arxiv.org/abs/1902.04885), ...)
+						  - Neural network explanability ([Information bottleneck](https://arxiv.org/abs/1503.02406), ...)
+						  - Sensor drifs ([Continual learning](https://arxiv.org/abs/1909.08383), ...) 
+						</div>
+					</section>
+
+					<section>
+						<h2 class='slide-title' align="left"><p style="color:#5D6D7E" >Acknowledgments</p></h2>
+						
+					</section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
