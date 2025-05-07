@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>revealjs</title>
+
+		<meta name="description" content="2024">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" style="font-size:40px">
+
+				<!-- New slide -->
+				<section style="font-size:40px">
+					<h3 style="color: #ffffff;">SONDRA WORKSHOP 2025</h3>
+					<h3 style="color: #ffffff;">https://sondra2025.sciencesconf.org/</h3><br>
+					<h2 style="color: #a8d2ff;">Research at NUS on optical and SAR data registration<br>using deep learning models </h2><br>
+					<div style="color: #ffffff;">Michael Dell'aiera, Koen Mouthaan</div>
+
+					<div class="container" style="margin:10px 120px 10px 120px">
+						<div class="title" style="border-radius: 10px; background-color:rgb(255, 255, 255, 1);">
+							<img src="resources/logos/logo_nus.png" style="height: 100px;"/>
+							<img src="resources/logos/logo_sondra.png" style="height: 100px;"/>
+						</div>
+					</div>
+
+					<div style="color: #ffffff;">May 14th 2025</div>
+					<div style="color: #ffffff;">mda@nus.edu.sg</div>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' style="color:#9ecdff" align="left">Introduction</h2><hr>
+
+					<p data-markdown style="text-align: left">
+						Postdoc at NUS, Singapore on Optical and SAR data fusion using deep learning techniques
+						<br>
+						PhD work on deep learning applied to astrophysics (CTAO project)
+					</p>
+
+					<br>
+					<div style="display: flex;">
+						<div style="width: 1%"></div>
+						<div style="width: 24%">
+							Topic 1<br>SAR and Optical registration
+							<hr>
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 2<br>Optical-guided SAR despeckling
+							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/despeckling.gif">
+								
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 3<br>Target detection in SAR images
+							<hr>
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 4<br>Free topics to explore in info fusion
+							<hr>
+						</div>
+						<div style="width: 1%"></div>
+				</section>
+				
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Definition and contextualisation</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 45%" align="left">
+							<div>
+								<em>Definition -</em> Image registration = Process of aligning two or more images, i.e. find the transformation that link them.
+
+								<ul>
+									<li>Wildly use in Computer Vision (medical, etc)</li>
+									<li>SAR and optical: Geometric and radiometric differences</li>
+									<li>Often 1st step before information fusion</li>
+								</ul>
+
+								Must be robust to scale, rotation, translation, occlusion, noise, etc.
+							</div>
+						</div>
+						<div style="width: 10%"></div>
+						<div style="width: 45%" align="left">
+							<figure>
+								<img style="width: 80%" src="resources/image_registration_sift.png">
+								<figcaption>Fig. Optical image registration using feature points</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[A Survey on SAR and Optical Satellite Image Registration.](https://www.mdpi.com/2072-4292/15/3/850)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">State-of-the-art of Image Registration (Non-exhaustive)</p></h2><hr>
+
+					<object type="image/svg+xml" data="resources/sota_registration.drawio.svg" width="100%"></object>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 50%" align="left">
+							<ul>
+								<li><em>Definition -</em> Image-to-image translation = Converting an image from one domain to another
+									<ul>
+										<li>What? Optical to SAR, SAR to optical, etc.</li>
+										<li>Why? Compute metrics on images from different domains is difficult</li>
+										<li>How? Popular methods are CycleGAN, pix2pix</li>
+									</ul>
+								</li>
+
+								<figure align="center">
+									<img style="width: 60%" src="resources/methodology.png">
+									<figcaption>Fig. Image registration with two different domains</figcaption>
+								</figure>
+							</ul>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/image_translation_example.png">
+								<figcaption>Fig. CycleGAN image translation examples</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+
+						[Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain adaptation</p></h2><hr>
+					
+
+					
+					<p data-markdown style="text-align: left; font-size:20px">
+						[test](https://arxiv.org/abs/1703.10593)
+
+						[test](https://arxiv.org/abs/1611.07004)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Superpoint</p></h2><hr>
+
+
+
+					<p data-markdown style="text-align: left; font-size:20px">
+						[test](https://arxiv.org/abs/1703.10593)
+
+						[test](https://arxiv.org/abs/1611.07004)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Conclusion and Perspectives</p></h2><hr>
+					
+					<p data-markdown style="text-align: left">
+						* May 15th &rarr; SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Annex: CycleGAN Architecture</p></h2><hr>
+
+					<figure>
+						<img style="width: 85%" src="resources/cyclegan.png">
+					</figure>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Annex: Despeckling</p></h2><hr>
+
+					<figure>
+						<img style="width: 70%" src="resources/despeckling.png">
+					</figure>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Notes</p></h2><hr>
+				</section>
+			</div>
+		</div>
+
+		<!-- To add color to code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				progress: true,
+				width: 1920,
+  				height: 1080,
+				center: false,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+			});
+		</script>
+	</body>
+</html>
