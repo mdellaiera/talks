@@ -48,26 +48,38 @@
 					<div style="display: flex;">
 						<div style="width: 1%"></div>
 						<div style="width: 24%">
-							Topic 1<br>SAR and Optical registration
+							Topic 1<br>SAR and Optical Registration
 							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/registration.png">
+							</figure>
+							<p style="color: red;">&rarr; Topic of the day</p>
 						</div>
 						<div style="width: 2%"></div>
 						<div style="width: 24%">
-							Topic 2<br>Optical-guided SAR despeckling
+							Topic 2<br>Optical-guided SAR Despeckling
 							<hr>
 							<figure>
 								<img style="width: 100%" src="resources/despeckling.gif">
-								
+							</figure>
 						</div>
 						<div style="width: 2%"></div>
 						<div style="width: 24%">
-							Topic 3<br>Target detection in SAR images
+							Topic 3<br>Target Detection in SAR Images
 							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/target_detection.png">
+							</figure>
+							In collabaration with<br>Xu Xiaowo (NUS)
 						</div>
 						<div style="width: 2%"></div>
 						<div style="width: 24%">
-							Topic 4<br>Free topics to explore in infomation fusion
+							Topic 4<br>Free Topics to Explore in Infomation Fusion / SAR
 							<hr>
+							<ul>
+								<li>Scintillations, following the works of Harsha (and now Hugo)</li>
+								<li>...</li>
+							</ul>
 						</div>
 						<div style="width: 1%"></div>
 				</section>
@@ -79,15 +91,20 @@
 					<div style="display: flex;">
 						<div style="width: 45%" align="left">
 							<div>
-								<em>Definition -</em> Image registration = Process of aligning two or more images, i.e. find the transformation that link them.
+								Image registration = Process of aligning two or more images, i.e. find the transformation that link them.
 
 								<ul>
 									<li>Wildly use in Computer Vision (medical, etc)</li>
 									<li>SAR and optical: Geometric and radiometric differences</li>
 									<li>Often 1st step before information fusion</li>
+									<li>Must be robust to scale, rotation, translation, occlusion, noise, etc.</li>
 								</ul>
-
-								Must be robust to scale, rotation, translation, occlusion, noise, etc.
+								<br><br>
+								<u>Objective of the presentation:</u>
+								<ul>
+									<li>Evaluate some popular deep learning methods</li>
+									<li>Assess domain adaptation</li>
+								</ul>
 							</div>
 						</div>
 						<div style="width: 10%"></div>
@@ -109,18 +126,33 @@
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">State-of-the-art of Image Registration (Non-exhaustive)</p></h2><hr>
 
 					<object type="image/svg+xml" data="resources/sota_registration.drawio.svg" width="100%"></object>
+
+					<div style="display: flex;">
+						<div style="width: 33%" align="left">
+							Area-Based<br>
+							<ul>
+								<li>No cross-modality</li>
+							</ul>
+						</div>
+						<div style="width: 33%" align="left">
+							Hand-designed<br>
+							<ul>
+								<li>No cross-modality</li>
+							</ul>
+						</div>
+						<div style="width: 33%" align="left">
+							Deep leaning-based<br>
+							<ul>
+								<li>Tailored filters</li>
+							</ul>
+						</div>
+					</div>
 				</section>
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Workflow</p></h2><hr>
 					
 
-
-					<p data-markdown style="text-align: left; font-size:20px">
-						[test](https://arxiv.org/abs/1703.10593)
-
-						[test](https://arxiv.org/abs/1611.07004)
-					</p>
 				</section>
 
 				<section>
@@ -161,18 +193,52 @@
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain adaptation</p></h2><hr>
+
+					<p data-markdown style="text-align: left;">
+						Def : Transfer knowledge from a source domain to a target domain
+						* Idea: we do not need all the information from the distributions
+						* Unpaired images
+						* Very wide state-of-the-art
+					</p>
 					
 					<div style="display: flex;">
 						<div style="width: 50%">
 							<figure align="center">
-								<img style="width: 50%" src="resources/domain_adaptation.png">
-								<figcaption>Fig. Domain Adaptation</figcaption>
+								<img style="width: 100%" src="resources/domain_adaptation_classification.png">
+								<figcaption>Fig. Domain Adaptation in Classification</figcaption>
 							</figure>
 						</div>
 						<div style="width: 50%">
 							<figure align="center">
+								<img style="width: 100%" src="resources/domain_adaptation_regression.png">
+								<figcaption>Fig. Domain Adaptation in Regression</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[Unsupervised Domain Adaptation for Regression Using Dictionary Learning, Dhaini et al., 2023](https://normandie-univ.hal.science/hal-04012551v1/file/Unsupervised_Domain_Adaptation_Using_Dictionary_Learning__HAL_.pdf)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain Adversarial Neural Network (DANN)</p></h2><hr>
+					
+					<div style="display: flex;">
+						<div style="width: 40%">
+							<p data-markdown style="text-align: left;">
+								* One of the most popular method
+								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
+								* Train an encoder to extract domain-invariant features
+								* $\mathcal{H}_y \\subseteq \mathcal{H}_d$
+								* Multi-task balancing
+							</p>
+						</div>
+						<div style="width: 60%">
+							<figure align="center">
 								<img style="width: 100%" src="resources/dann.png">
-								<figcaption>Fig. Domain Adversarial Neural Network (DANN)</figcaption>
+								<figcaption>Fig. Architecture of the DANN</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -180,8 +246,6 @@
 					<hr>
 					<p data-markdown style="text-align: left; font-size:20px">
 						[Domain-Adversarial Training of Neural Networks, Ganin et al., 2015](https://arxiv.org/abs/1505.07818)
-
-						[Unsupervised Domain Adaptation for Regression Using Dictionary Learning, Dhaini et al., 2023](https://normandie-univ.hal.science/hal-04012551v1/file/Unsupervised_Domain_Adaptation_Using_Dictionary_Learning__HAL_.pdf)
 					</p>
 				</section>
 
@@ -191,8 +255,9 @@
 					<div style="display: flex;">
 						<div style="width: 50%">
 							<figure align="center">
-								<img style="width: 100%" src="resources/superpoint.png">
-								<figcaption>Fig. Superpoint</figcaption>
+								<img style="width: 90%" src="resources/superpoint.png">
+								<figcaption>Fig. Architecture of the SuperPoint</figcaption>
+							</figure>
 						</div>
 						<div style="width: 50%">
 
@@ -206,7 +271,13 @@
 				</section>
 
 				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results</p></h2><hr>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (CycleGAN+SuperPoint)</p></h2><hr>
+					
+
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (DANN+SuperPoint)</p></h2><hr>
 					
 
 				</section>
@@ -215,7 +286,17 @@
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Conclusion and Perspectives</p></h2><hr>
 					
 					<p data-markdown style="text-align: left">
-						* May 15th &rarr; SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
+						* Image translation methods "hallucinate", i.e. they create new features that are not present in the original image
+
+						* Domain adaptation methods are difficult to train
+
+						* Other domain adaptation methods to explore, e.g. Optimal Transport
+
+						&rarr; May 15th, SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
+
+						* Likelihood-free inference (likelihood-ratio estimation): Recasting a regression-style inference problem as a classification problem in order to sidestep the need for a likelihood ($\mathcal{H}_y \\subseteq \mathcal{H}_d$)
+
+						* Test on different resolutions
 					</p>
 				</section>
 
