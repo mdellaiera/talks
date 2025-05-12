@@ -38,11 +38,11 @@
 				<section>
 					<h2 class='slide-title' style="color:#9ecdff" align="left">Introduction</h2><hr>
 
-					<p data-markdown style="text-align: left">
+					<div align="left">
 						Postdoc at NUS, Singapore on Optical and SAR data fusion using deep learning techniques
 						<br>
-						PhD work on deep learning applied to astrophysics (CTAO project)
-					</p>
+						PhD work on deep learning applied to astrophysics (CTAO project, telescopes for gamma-ray astronomy)
+					</div>
 
 					<br>
 					<div style="display: flex;">
@@ -89,11 +89,13 @@
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Definition and contextualisation</p></h2><hr>
 
+					Process of aligning two or more images of the same scene, i.e. find the transformation that link them.<br><br>
+
 					<div style="display: flex;">
 						<div style="width: 55%" align="left">
 							<div>
 								<ul>
-									<li>Hundreds of remote sensing satellite launched between 1962 and 2014 [1]</li>
+									<li>Hundreds of remote sensing satellite launched between 1962 and 2014 [1] (Big data)</li>
 									<li>Collect information from different modalities</li>
 								</ul>	
 								<br>
@@ -104,18 +106,16 @@
 									<li>Geometric and radiometric differences</li>
 								</ul>
 								<br>
-								&rarr; Scale, rotation, translation, occlusion, noise, etc.
-
+								&rarr; Domain shifts
 								<br><br>
-								<u>Objective of the presentation:</u>
+								<u>Objective:</u> Tackle domain shift for image registration
 								<ul>
-									<li>Evaluate a popular deep learning method (CycleGAN) for image registration</li>
-									<li>Assess domain adaptation and compare</li>
+									<li>Image translation (CycleGAN)</li>
+									<li>Domain adaptation</li>
 								</ul>
 							</div>
 						</div>
 						<div style="width: 45%" align="left">
-							Image registration = Process of aligning two or more images, i.e. find the transformation that link them.
 							<figure>
 								<img style="width: 80%" src="resources/image_registration_sift.png">
 								<figcaption>Fig. Optical-optical image registration [2]</figcaption>
@@ -148,17 +148,17 @@
 						  <tr>
 							<td><strong>Area-Based</strong></td>
 							<td>Simple, fast (Intensity)</td>
-							<td>Fail with complex transformations</td>
+							<td>Fail with complex transformations, domain shift</td>
 						  </tr>
 						  <tr>
 							<td><strong>Hand-Designed</strong></td>
 							<td>Robust to scale/rotation, interpretable</td>
-							<td>Less robust in low-texture/repetitive areas, no semantic insight</td>
+							<td>Less robust in low-texture/repetitive areas, domain shift</td>
 						  </tr>
 						  <tr>
 							<td><strong>Deep Learning</strong></td>
 							<td>Highly robust, context-aware</td>
-							<td>Requires training, overfitting</td>
+							<td>Requires training, domain shift</td>
 						  </tr>
 						</tbody>
 					  </table>
@@ -171,13 +171,13 @@
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 90%" src="resources/superpoint.png">
-								<figcaption>Fig. Architecture of the SuperPoint</figcaption>
+								<figcaption>Fig. Architecture of the SuperPoint [1]</figcaption>
 							</figure>
 						</div>
 						<div style="width: 50%">
 							<p data-markdown style="text-align: left;">
 								* Self-supervised learning of keypoints and descriptors
-								* Two networks: Keypoint detector and descriptor
+								* Deep learning-based SIFTm zith tailored filters for descriptor computation
 								* Susceptible to domain shifts
 
 								&rarr; Need for Image-translation / domain adaptation
@@ -187,12 +187,12 @@
 
 					<hr>
 					<p data-markdown style="text-align: left; font-size:20px">
-						[SuperPoint: Self-Supervised Interest Point Detection and Description, DeTone et al., 2017](https://arxiv.org/abs/1712.07629)
+						[1] [SuperPoint: Self-Supervised Interest Point Detection and Description, DeTone et al., 2017](https://arxiv.org/abs/1712.07629)
 					</p>
 				</section>
 
 				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation (CycleGAN)</p></h2><hr>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation (CycleGAN [1])</p></h2><hr>
 
 					<figure>
 						<img style="width: 75%" src="resources/cyclegan.png">
@@ -200,16 +200,18 @@
 
 					<hr>
 					<p data-markdown style="text-align: left; font-size:20px">
-						[Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+						[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
 					</p>
 				</section>
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain adaptation</p></h2><hr>
 
+					Transfer knowledge from a source domain to a target domain.<br>
+
 					<p data-markdown style="text-align: left;">
-						Transfer knowledge from a source domain to a target domain
-						* Idea: we do not need all the information from the distributions
+						* Source is labelled, target is labelled: Unsupervised
+						* Idea vs Image-translation: we do not need all the information from the distributions to extract keypoints
 						* Very wide state-of-the-art [1]
 					</p>
 					
@@ -243,11 +245,13 @@
 						<div style="width: 40%">
 							<p data-markdown style="text-align: left;">
 								* One of the most popular method
-								* Unpaired images, unsupervised
+								* Unpaired images, unsupervised learning for domain
 								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
 								* Train an encoder to extract domain-invariant features
 								* $\mathcal{H}_y \\subseteq \mathcal{H}_d$
 								* Multi-task balancing
+
+								* TODO INCLUDE THE ARCHITECTURE HERE
 							</p>
 						</div>
 						<div style="width: 60%">
@@ -266,14 +270,55 @@
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (CycleGAN+SuperPoint)</p></h2><hr>
-					
-					Sentinel-1 (SAR) and Sentinel-2 (optical) with spatial resolution of 
+
+					<div style="display: flex;">
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_real_B.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_fake_B.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_real_A.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_fake_A.png">
+						</div>
+					</div>
+
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/cyclagan_opt_opt.png">
+								<figcaption>Fig. SAR to Optical</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/cyclagan_sar_sar.png">
+								<figcaption>Fig. Optical to SAR</figcaption>
+							</figure>
+						</div>
+					</div>
 				</section>
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (DANN+SuperPoint)</p></h2><hr>
 					
-
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/dann_matches_before_adaptation.png">
+								<figcaption>Fig. Before adaptation</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/dann_matches_after_adaptation.png">
+								<figcaption>Fig. After adaptation</figcaption>
+							</figure>
+						</div>
+					</div>
 				</section>
 
 				<section>
