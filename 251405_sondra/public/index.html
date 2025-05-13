@@ -18,6 +18,7 @@
 
 				<!-- New slide -->
 				<section style="font-size:40px">
+					<br><br>
 					<h3 style="color: #ffffff;">SONDRA WORKSHOP 2025</h3>
 					<h3 style="color: #ffffff;">https://sondra2025.sciencesconf.org/</h3><br>
 					<h2 style="color: #a8d2ff;">Research at NUS on optical and SAR data registration<br>using deep learning models </h2><br>
@@ -39,9 +40,10 @@
 					<h2 class='slide-title' style="color:#9ecdff" align="left">Introduction</h2><hr>
 
 					<div align="left">
-						Postdoc at NUS, Singapore on Optical and SAR data fusion using deep learning techniques
-						<br>
-						PhD work on deep learning applied to astrophysics (CTAO project, telescopes for gamma-ray astronomy)
+						<ul>
+							<li>PhD work on deep learning applied to astrophysics (CTAO project, telescopes for gamma-ray astronomy)</li>
+							<li>Postdoc at NUS, Singapore on Optical and SAR data fusion using deep learning techniques</li>
+						</ul>
 					</div>
 
 					<br>
@@ -134,7 +136,7 @@
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">State-of-the-art of Image Registration (Non-exhaustive)</p></h2><hr>
 
-					<object type="image/svg+xml" data="resources/sota_registration.drawio.svg" width="100%"></object>
+					<object type="image/svg+xml" data="resources/sota_registration.drawio.svg" width="90%"></object>
 
 					<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: left;">
 						<thead>
@@ -148,17 +150,17 @@
 						  <tr>
 							<td><strong>Area-Based</strong></td>
 							<td>Simple, fast (Intensity)</td>
-							<td>Fail with complex transformations, domain shift</td>
+							<td>Fail with complex transformations, <span style="color:#ff2d2d">domain shift</span></td>
 						  </tr>
 						  <tr>
 							<td><strong>Hand-Designed</strong></td>
-							<td>Robust to scale/rotation, interpretable</td>
-							<td>Less robust in low-texture/repetitive areas, domain shift</td>
+							<td>Robust to scale/rotation, more interpretable</td>
+							<td>Less robust in homogenous areas, <span style="color:#ff2d2d">domain shift</span></td>
 						  </tr>
 						  <tr>
 							<td><strong>Deep Learning</strong></td>
-							<td>Highly robust, context-aware</td>
-							<td>Requires training, domain shift</td>
+							<td>Highly robust, context-aware, requires training (flexibility)</td>
+							<td>Requires training (optimization problem), <span style="color:#ff2d2d">domain shift</span></td>
 						  </tr>
 						</tbody>
 					  </table>
@@ -176,9 +178,14 @@
 						</div>
 						<div style="width: 50%">
 							<p data-markdown style="text-align: left;">
-								* Self-supervised learning of keypoints and descriptors
-								* Deep learning-based SIFTm zith tailored filters for descriptor computation
-								* Susceptible to domain shifts
+								* Can be seen as a deep learning-based SIFT, with tailored filters for descriptor computation
+
+								* Training specificities:
+									* Shared autoencoder between keypoint and descriptor
+									* Ground-truth interest point labels
+									* Random homography generation (transformation-invariant keypoints)
+
+								* Application to SAR data gives many false positives because of speckle noise
 
 								&rarr; Need for Image-translation / domain adaptation
 							</p>
@@ -189,6 +196,39 @@
 					<p data-markdown style="text-align: left; font-size:20px">
 						[1] [SuperPoint: Self-Supervised Interest Point Detection and Description, DeTone et al., 2017](https://arxiv.org/abs/1712.07629)
 					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image Translation</p></h2><hr>
+
+					Transforming an image from one domain into another.<br>
+
+					<div style="display: flex;">
+						<div style="width: 35%">
+							<p data-markdown style="text-align: left;">
+								* Currently a trend topic in deep learning (diffusion models)
+
+								* Paired/Unpaired SAR and Optical images for training
+
+								* Needs to be trained on a large (paired) datasets (e.g. Sentinel1-2)
+
+								* CycleGAN [1]: 
+									* Applied in many various domains
+									* Cycle Consistency to enforce structure preservation
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+							</p>
+						</div>
+						<div style="width: 65%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/superpoint_image_translation.png">
+								<figcaption>Fig. Superpoint combined with Image translation</figcaption>
+							</figure>
+						</div>
+					</div>
 				</section>
 
 				<section>
@@ -210,7 +250,7 @@
 					Transfer knowledge from a source domain to a target domain.<br>
 
 					<p data-markdown style="text-align: left;">
-						* Source is labelled, target is labelled: Unsupervised
+						* Source is labelled, target is unlabelled: Unsupervised
 						* Idea vs Image-translation: we do not need all the information from the distributions to extract keypoints
 						* Very wide state-of-the-art [1]
 					</p>
@@ -240,32 +280,61 @@
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain Adversarial Neural Network (DANN)</p></h2><hr>
+
+					Train an encoder to extract domain-invariant features<br>
 					
 					<div style="display: flex;">
 						<div style="width: 40%">
 							<p data-markdown style="text-align: left;">
 								* One of the most popular method
-								* Unpaired images, unsupervised learning for domain
-								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
-								* Train an encoder to extract domain-invariant features
-								* $\mathcal{H}_y \\subseteq \mathcal{H}_d$
-								* Multi-task balancing
 
-								* TODO INCLUDE THE ARCHITECTURE HERE
+								* Unpaired images, unsupervised learning for domain
+
+								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
+
+								* Assumption: $\mathcal{H}_y \\subseteq \mathcal{H}_d$
+
+								* Multi-task balancing: possibly conflicting gradients during optimization
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[Domain-Adversarial Training of Neural Networks, Ganin et al., 2015](https://arxiv.org/abs/1505.07818)
 							</p>
 						</div>
 						<div style="width: 60%">
+							<br>
 							<figure align="center">
 								<img style="width: 100%" src="resources/dann.png">
 								<figcaption>Fig. Architecture of the DANN</figcaption>
 							</figure>
 						</div>
 					</div>
+				</section>
 
-					<hr>
-					<p data-markdown style="text-align: left; font-size:20px">
-						[Domain-Adversarial Training of Neural Networks, Ganin et al., 2015](https://arxiv.org/abs/1505.07818)
-					</p>
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Superpoint combined with Domain Adaptation</p></h2><hr>
+					
+					<div style="display: flex;">
+						<div style="width: 40%">
+							<p data-markdown style="text-align: left;">
+								* Inspired from NLP with Transformers models: "Pre-training for Feature Alignment" [1]
+
+								* Freeze the encoder and train an intermediate set of layers to extract domain-invariant features: Auto-encoding + DANN
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [Visual Instruction Tuning, Liu et al., 2023](https://arxiv.org/pdf/2304.08485)
+							</p>
+						</div>
+						<div style="width: 60%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/superpoint_domain_adaptation.png">
+								<figcaption>Fig. Architecture of the SuperPoint combined with DANN</figcaption>
+							</figure>
+						</div>
+					</div>
 				</section>
 
 				<section>
@@ -322,12 +391,6 @@
 				</section>
 
 				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Summary</p></h2><hr>
-					
-					Tableau recapitulatif des résultats obtenus sur les deux méthodes de registration, avantages et inconvénients de chacune d'entre elles
-				</section>
-
-				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Conclusion and Perspectives</p></h2><hr>
 					
 					<p data-markdown style="text-align: left">
@@ -337,13 +400,15 @@
 
 						&rarr; Wasserstein-DANN with Optimal Transport based distance computation
 
+						&rarr; End-to-end training of the model
+
 						* Other domain adaptation methods to explore, e.g. Optimal Transport
 
 						&rarr; May 15th, SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
 
 						* Likelihood-free inference (likelihood-ratio estimation): Recasting a regression-style inference problem as a classification problem in order to sidestep the need for a likelihood ($\mathcal{H}_y \\subseteq \mathcal{H}_d$)
 
-						* Test on different resolutions
+						* Test on different resolutions, and how it generalizes to different datasets
 					</p>
 				</section>
 
