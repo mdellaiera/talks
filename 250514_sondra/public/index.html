@@ -120,7 +120,7 @@
 						<div style="width: 45%" align="left">
 							<figure>
 								<img style="width: 80%" src="resources/image_registration_sift.png">
-								<figcaption>Fig. Optical-optical image registration [2]</figcaption>
+								<figcaption>Fig. Optical-optical image registration (SIFT algorithm in this case) [2]</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -232,19 +232,6 @@
 				</section>
 
 				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation (CycleGAN [1])</p></h2><hr>
-
-					<figure>
-						<img style="width: 75%" src="resources/cyclegan.png">
-					</figure>
-
-					<hr>
-					<p data-markdown style="text-align: left; font-size:20px">
-						[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
-					</p>
-				</section>
-
-				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain adaptation</p></h2><hr>
 
 					Transfer knowledge from a source domain to a target domain.<br>
@@ -290,11 +277,13 @@
 
 								* Unpaired images, unsupervised learning for domain
 
-								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
+								* Min-Max optimization: Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
 
 								* Assumption: $\mathcal{H}_y \\subseteq \mathcal{H}_d$
 
-								* Multi-task balancing: possibly conflicting gradients during optimization
+								* Multi-task: Possibly conflicting gradients during optimization
+
+								&rarr; How to include DANN with SuperPoint ?
 							</p>
 
 							<hr>
@@ -321,8 +310,11 @@
 								* Inspired from NLP with Transformers models: "Pre-training for Feature Alignment" [1]
 
 								* Freeze the encoder and train an intermediate set of layers to extract domain-invariant features: Auto-encoding + DANN
+
+								* In opposition to end-to-end training
 							</p>
 
+							<br><br><br><br><br><br>
 							<hr>
 							<p data-markdown style="text-align: left; font-size:20px">
 								[1] [Visual Instruction Tuning, Liu et al., 2023](https://arxiv.org/pdf/2304.08485)
@@ -388,6 +380,17 @@
 							</figure>
 						</div>
 					</div>
+
+					<div data-markdown style="text-align: left">
+						* Evaluation metrics: Compute the translation (Should be the Identity in this case)
+
+						* Slight improvment: around 10% on average compared to no domain adaptation
+
+						* Something is happening, but is it limited by:
+							* Methodology
+							* Training and hyperparametrization
+							* Others
+					</div>
 				</section>
 
 				<section>
@@ -400,15 +403,26 @@
 
 						&rarr; Wasserstein-DANN with Optimal Transport based distance computation
 
-						&rarr; End-to-end training of the model
-
-						* Other domain adaptation methods to explore, e.g. Optimal Transport
-
 						&rarr; May 15th, SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
+
+						&rarr; End-to-end training of the model
 
 						* Likelihood-free inference (likelihood-ratio estimation): Recasting a regression-style inference problem as a classification problem in order to sidestep the need for a likelihood ($\mathcal{H}_y \\subseteq \mathcal{H}_d$)
 
 						* Test on different resolutions, and how it generalizes to different datasets
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation (CycleGAN [1])</p></h2><hr>
+
+					<figure>
+						<img style="width: 75%" src="resources/cyclegan.png">
+					</figure>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
 					</p>
 				</section>
 
