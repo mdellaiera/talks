@@ -1,0 +1,453 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation</title>
+
+		<meta name="description" content="2024">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" style="font-size:40px">
+
+				<!-- New slide -->
+				<section style="font-size:40px">
+					<br><br>
+					<h3 style="color: #ffffff;">DSO Progress Report</h3>
+					<h2 style="color: #a8d2ff;">Research at NUS on optical and SAR data registration<br>using deep learning models</h2><br>
+					<div style="color: #ffffff;">Michael Dell'aiera, Koen Mouthaan</div>
+
+					<div class="container" style="margin:10px 120px 10px 120px">
+						<div class="title" style="border-radius: 10px; background-color:rgb(255, 255, 255, 1);">
+							<img src="resources/logos/logo_nus.png" style="height: 100px;"/>
+							<img src="resources/logos/logo_dso.png" style="height: 100px;"/>
+						</div>
+					</div>
+
+					<div style="color: #ffffff;">July 2nd 2025</div>
+					<div style="color: #ffffff;">mda@nus.edu.sg</div>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' style="color:#9ecdff" align="left">Introduction</h2><hr>
+
+					<div align="left">
+						<ul>
+							<li>PhD work on deep learning applied to astrophysics (CTAO project, telescopes for gamma-ray astronomy)</li>
+							<li>Postdoc at NUS, Singapore on Optical and SAR data fusion using deep learning techniques</li>
+						</ul>
+					</div>
+
+					<br>
+					<div style="display: flex;">
+						<div style="width: 1%"></div>
+						<div style="width: 24%">
+							Topic 1<br>SAR and Optical Registration
+							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/registration.png">
+							</figure>
+							<p style="color: red;">&rarr; Topic of the day</p>
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 2<br>Optical-guided SAR Despeckling
+							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/despeckling.gif">
+							</figure>
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 3<br>Target Detection in SAR Images
+							<hr>
+							<figure>
+								<img style="width: 100%" src="resources/target_detection.png">
+							</figure>
+							In collabaration with<br>Xu Xiaowo (NUS)
+						</div>
+						<div style="width: 2%"></div>
+						<div style="width: 24%">
+							Topic 4<br>Free Topics to Explore in Infomation Fusion / SAR
+							<hr>
+							<ul>
+								<li>Scintillations, following the works of Harsha (and now Hugo)</li>
+								<li>Complex-Valued Neural Network</li>
+								<li>...</li>
+							</ul>
+						</div>
+						<div style="width: 1%"></div>
+				</section>
+				
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Definition and contextualisation</p></h2><hr>
+
+					Process of aligning two or more images of the same scene, i.e. find the transformation that link them.<br><br>
+
+					<div style="display: flex;">
+						<div style="width: 55%" align="left">
+							<div>
+								<ul>
+									<li>Hundreds of remote sensing satellite launched between 1962 and 2014 [1] (Big data)</li>
+									<li>Collect information from different modalities</li>
+								</ul>	
+								<br>
+								&rarr; Makes possible information fusion to link pixel information with signal and physical properties
+								<br><br>
+								<ul>
+									<li>Different spatial resolution</li>
+									<li>Geometric and radiometric differences</li>
+								</ul>
+								<br>
+								&rarr; Domain shifts
+								<br><br>
+								<u>Objective:</u> Tackle domain shift for image registration
+								<ul>
+									<li>Image translation (CycleGAN)</li>
+									<li>Domain adaptation</li>
+								</ul>
+							</div>
+						</div>
+						<div style="width: 45%" align="left">
+							<figure>
+								<img style="width: 80%" src="resources/image_registration_sift.png">
+								<figcaption>Fig. Optical-optical image registration [2]</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [A survey of remote-sensing big data, Liu, 2015](https://www.researchgate.net/publication/281529343_A_survey_of_remote-sensing_big_data)
+
+						[2] [A Survey on SAR and Optical Satellite Image Registration, Sommervold et al, 2023.](https://www.mdpi.com/2072-4292/15/3/850)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">State-of-the-art of Image Registration (Non-exhaustive)</p></h2><hr>
+
+					<object type="image/svg+xml" data="resources/sota_registration.drawio.svg" width="90%"></object>
+
+					<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; text-align: left;">
+						<thead>
+						  <tr>
+							<th>Category</th>
+							<th>Pros</th>
+							<th>Cons</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td><strong>Area-Based</strong></td>
+							<td>Simple, fast (Intensity)</td>
+							<td>Fail with complex transformations, <span style="color:#ff2d2d">domain shift</span></td>
+						  </tr>
+						  <tr>
+							<td><strong>Hand-Designed</strong></td>
+							<td>Robust to scale/rotation, more interpretable</td>
+							<td>Less robust in homogenous areas, <span style="color:#ff2d2d">domain shift</span></td>
+						  </tr>
+						  <tr>
+							<td><strong>Deep Learning</strong></td>
+							<td>Highly robust, context-aware, requires training (flexibility)</td>
+							<td>Requires training (optimization problem), <span style="color:#ff2d2d">domain shift</span></td>
+						  </tr>
+						</tbody>
+					  </table>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Superpoint</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/superpoint.png">
+								<figcaption>Fig. Architecture of the SuperPoint [1]</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<p data-markdown style="text-align: left;">
+								* Can be seen as a deep learning-based SIFT, with tailored filters for descriptor computation
+
+								* Training specificities:
+									* Shared autoencoder between keypoint and descriptor
+									* Ground-truth interest point labels
+									* Random homography generation (transformation-invariant keypoints)
+
+								* Application to SAR data gives many false positives because of speckle noise
+
+								&rarr; Need for Image-translation / domain adaptation
+							</p>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [SuperPoint: Self-Supervised Interest Point Detection and Description, DeTone et al., 2017](https://arxiv.org/abs/1712.07629)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image Translation</p></h2><hr>
+
+					Transforming an image from one domain into another.<br>
+
+					<div style="display: flex;">
+						<div style="width: 35%">
+							<p data-markdown style="text-align: left;">
+								* Currently a trend topic in deep learning (diffusion models)
+
+								* Paired/Unpaired SAR and Optical images for training
+
+								* Needs to be trained on a large (paired) datasets (e.g. Sentinel1-2)
+
+								* CycleGAN [1]: 
+									* Applied in many various domains
+									* Cycle Consistency to enforce structure preservation
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+							</p>
+						</div>
+						<div style="width: 65%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/superpoint_image_translation.png">
+								<figcaption>Fig. Superpoint combined with Image translation</figcaption>
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Image-to-image Translation (CycleGAN [1])</p></h2><hr>
+
+					<figure>
+						<img style="width: 75%" src="resources/cyclegan.png">
+					</figure>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain adaptation</p></h2><hr>
+
+					Transfer knowledge from a source domain to a target domain.<br>
+
+					<p data-markdown style="text-align: left;">
+						* Source is labelled, target is unlabelled: Unsupervised
+						* Idea vs Image-translation: we do not need all the information from the distributions to extract keypoints
+						* Very wide state-of-the-art [1]
+					</p>
+					
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/domain_adaptation_classification.png">
+								<figcaption>Fig. Domain Adaptation in Classification [2]</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/domain_adaptation_regression.png">
+								<figcaption>Fig. Domain Adaptation in Regression [2]</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [A Review of Single-Source Deep Unsupervised Visual Domain Adaptation, Zhao, 2020](https://arxiv.org/abs/2009.00155)
+
+						[2] [Unsupervised Domain Adaptation for Regression Using Dictionary Learning, Dhaini et al., 2023](https://normandie-univ.hal.science/hal-04012551v1/file/Unsupervised_Domain_Adaptation_Using_Dictionary_Learning__HAL_.pdf)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Domain Adversarial Neural Network (DANN)</p></h2><hr>
+
+					Train an encoder to extract domain-invariant features<br>
+					
+					<div style="display: flex;">
+						<div style="width: 40%">
+							<p data-markdown style="text-align: left;">
+								* One of the most popular method
+
+								* Unpaired images, unsupervised learning for domain
+
+								* Introduces Gradient Reversal Layer (GRL) and domain discriminator to compute an estimate of the $\mathcal{A}$-distance
+
+								* Assumption: $\mathcal{H}_y \\subseteq \mathcal{H}_d$
+
+								* Multi-task balancing: possibly conflicting gradients during optimization
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[Domain-Adversarial Training of Neural Networks, Ganin et al., 2015](https://arxiv.org/abs/1505.07818)
+							</p>
+						</div>
+						<div style="width: 60%">
+							<br>
+							<figure align="center">
+								<img style="width: 100%" src="resources/dann.png">
+								<figcaption>Fig. Architecture of the DANN</figcaption>
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Superpoint combined with Domain Adaptation</p></h2><hr>
+					
+					<div style="display: flex;">
+						<div style="width: 40%">
+							<p data-markdown style="text-align: left;">
+								* Inspired from NLP with Transformers models: "Pre-training for Feature Alignment" [1]
+
+								* Freeze the encoder and train an intermediate set of layers to extract domain-invariant features: Auto-encoding + DANN
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [Visual Instruction Tuning, Liu et al., 2023](https://arxiv.org/pdf/2304.08485)
+							</p>
+						</div>
+						<div style="width: 60%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/superpoint_domain_adaptation.png">
+								<figcaption>Fig. Architecture of the SuperPoint combined with DANN</figcaption>
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (CycleGAN+SuperPoint)</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_real_B.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_fake_B.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_real_A.png">
+						</div>
+						<div style="width: 25%">
+							<img style="width: 75%" src="resources/cyclagan_fake_A.png">
+						</div>
+					</div>
+
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/cyclagan_opt_opt.png">
+								<figcaption>Fig. SAR to Optical</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 90%" src="resources/cyclagan_sar_sar.png">
+								<figcaption>Fig. Optical to SAR</figcaption>
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Preliminary Results (DANN+SuperPoint)</p></h2><hr>
+					
+					<div style="display: flex;">
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/dann_matches_before_adaptation.png">
+								<figcaption>Fig. Before adaptation</figcaption>
+							</figure>
+						</div>
+						<div style="width: 50%">
+							<figure align="center">
+								<img style="width: 100%" src="resources/dann_matches_after_adaptation.png">
+								<figcaption>Fig. After adaptation</figcaption>
+							</figure>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Conclusion and Perspectives</p></h2><hr>
+					
+					<p data-markdown style="text-align: left">
+						* Image translation methods "hallucinate", i.e. they create new features that are not present in the original image
+
+						* Domain adaptation methods are difficult to train, especially adversarial methods
+
+						&rarr; Wasserstein-DANN with Optimal Transport based distance computation
+
+						&rarr; End-to-end training of the model
+
+						* Other domain adaptation methods to explore, e.g. Optimal Transport
+
+						&rarr; May 15th, SP.4: Optimal Transport for Radar Domain Adaptation, by Daniel Brooks 
+
+						* Likelihood-free inference (likelihood-ratio estimation): Recasting a regression-style inference problem as a classification problem in order to sidestep the need for a likelihood ($\mathcal{H}_y \\subseteq \mathcal{H}_d$)
+
+						* Test on different resolutions, and how it generalizes to different datasets
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Annex: Despeckling</p></h2><hr>
+
+					<figure>
+						<img style="width: 70%" src="resources/despeckling.png">
+					</figure>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Notes</p></h2><hr>
+				</section>
+			</div>
+		</div>
+
+		<!-- To add color to code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				progress: true,
+				width: 1920,
+  				height: 1080,
+				center: false,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+			});
+		</script>
+	</body>
+</html>
