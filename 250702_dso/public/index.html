@@ -39,7 +39,7 @@
 					<h2 class='slide-title' style="color:#9ecdff" align="left">Workflow</h2><hr>
 
 					<figure>
-						<img style="width: 85%" src="resources/workflow.png">
+						<img style="width: 90%" src="resources/workflow.png">
 					</figure>
 				</section>
 				
@@ -110,12 +110,12 @@
 						<div style="width: 40%">
 							<figure>
 								<img style="height: 350px" src="resources/superpoint_matched_keypoints.png">
-								<figcaption>Fig. Keypoint matching (radius=5)</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. Keypoint matching (radius=5)</figcaption>
 							</figure>
-
+							<br>
 							<figure>
 								<img style="height: 350px" src="resources/superpoint_descriptor_importance.png">
-								<figcaption>Fig. Keypoint weight (red=high, blue=low)</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. Keypoint weight (red=high, blue=low)</figcaption>
 							</figure>
 						</div>
 
@@ -126,13 +126,20 @@
 						<div style="width: 55%">
 							<figure>
 								<img style="height: 500px" src="resources/superpoint_keypoints_vs_radius.png">
-								<figcaption>Fig. % of keypoints as a function of the radius</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. % of keypoints as a function of the radius</figcaption>
 							</figure>
 
-							<br>
-							<p data-markdown="" style="text-align: left">
-								* For a radius r=5, 20% of keypoints are matching
-								* Consistent across different images
+							<br><br>
+							<div style="text-align: left;">
+								Calculated on the QXS-SAROPT dataset [1]
+							</div>
+							<div style="text-align: left; color: rgb(255, 67, 67);">
+								For a radius r=5, ~20% of keypoints are consistently matched
+							</div>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [The QXS-SAROPT Dataset for Deep Learning in SAR-Optical Data Fusion, Huang et al., 2021](https://arxiv.org/abs/2103.08259)
 							</p>
 						</div>
 					</div>
@@ -143,16 +150,28 @@
 
 					<div style="display: flex;">
 						<div style="width: 25%">
-							<img style="width: 75%" src="resources/cyclegan_real_B.png">
+							<figure align="center">
+								<img style="width: 75%" src="resources/cyclegan_real_B.png">
+								<figcaption style="margin-top: -0.8em;">Real optical</figcaption>
+							</figure>
 						</div>
 						<div style="width: 25%">
-							<img style="width: 75%" src="resources/cyclegan_fake_B.png">
+							<figure align="center">
+								<img style="width: 75%" src="resources/cyclegan_fake_B.png">
+								<figcaption style="margin-top: -0.8em;">Translated SAR</figcaption>
+							</figure>
 						</div>
 						<div style="width: 25%">
-							<img style="width: 75%" src="resources/cyclegan_real_A.png">
+							<figure align="center">
+								<img style="width: 75%" src="resources/cyclegan_real_A.png">
+								<figcaption style="margin-top: -0.8em;">Real SAR</figcaption>
+							</figure>
 						</div>
 						<div style="width: 25%">
-							<img style="width: 75%" src="resources/cyclegan_fake_A.png">
+							<figure align="center">
+								<img style="width: 75%" src="resources/cyclegan_fake_A.png">
+								<figcaption style="margin-top: -0.8em;">Translated optical</figcaption>
+							</figure>
 						</div>
 					</div>
 
@@ -160,13 +179,13 @@
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 80%" src="resources/cyclegan_opt_opt.png">
-								<figcaption>Fig. SAR to Optical</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. SAR to Optical</figcaption>
 							</figure>
 						</div>
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 80%" src="resources/cyclegan_sar_sar.png">
-								<figcaption>Fig. Optical to SAR</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. Optical to SAR</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -179,13 +198,13 @@
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 100%" src="resources/dann_matches_before_adaptation.png">
-								<figcaption>Fig. Before adaptation</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. Before adaptation</figcaption>
 							</figure>
 						</div>
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 100%" src="resources/dann_matches_after_adaptation.png">
-								<figcaption>Fig. After adaptation</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. After adaptation</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -231,7 +250,7 @@
 
 					<figure>
 						<img style="width: 100%" src="resources/despeckling_kmeans.png">
-						<figcaption>Fig. Optical-guided despeckling using K-means. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
+						<figcaption style="margin-top: -0.8em;">Fig. Optical-guided despeckling using K-means. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
 					</figure>
 				</section>
 
@@ -240,20 +259,11 @@
 
 					<figure>
 						<img style="width: 100%" src="resources/despeckling_filtered.png">
-						<figcaption>Fig. Optical-guided despeckling using distance metric. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
+						<figcaption style="margin-top: -0.8em;">Fig. Optical-guided despeckling using distance metric. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
 					</figure>
 
 					\[ \begin{aligned} \mathcal{D}_{\sigma_d}(p, q) &amp; =  \exp{\left(-\dfrac{||S(p)-S(q)||^2}{2 \sigma_d^2}\right)} \\
 					\mu(p) &amp; =  Z^{-1} \sum_{q} L_{SAR}(q) \mathcal{D}_{\sigma_d}(p, q) \end{aligned} \]
-				</section>
-
-				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Despeckling</p></h2><hr>
-
-					<figure>
-						<img style="width: 60%" src="resources/despeckling_sar.png">
-						<figcaption>Fig. Despeckling using SAR descriptor</figcaption>
-					</figure>
 				</section>
 
 				<section>
