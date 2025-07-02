@@ -19,14 +19,14 @@
 				<!-- New slide -->
 				<section style="font-size:40px">
 					<br><br><br>
-					<h3 style="color: #ffffff;">DSO Progress Report</h3>
+					<h3 style="color: #ffffff;">Progress Report</h3>
 					<h2 style="color: #a8d2ff;">Research at NUS on optical and SAR data registration<br>using deep learning models</h2><br>
 					<div style="color: #ffffff;">Michael Dell'aiera, Koen Mouthaan</div>
 
 					<div class="container" style="margin:10px 120px 10px 120px">
 						<div class="title" style="border-radius: 10px; background-color:rgb(255, 255, 255, 1);">
 							<img src="resources/logos/logo_nus.png" style="height: 100px;"/>
-							<img src="resources/logos/logo_dso.png" style="height: 100px;"/>
+							<!-- <img src="resources/logos/logo_dso.png" style="height: 100px;"/> -->
 						</div>
 					</div>
 
@@ -179,13 +179,13 @@
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 80%" src="resources/cyclegan_opt_opt.png">
-								<figcaption style="margin-top: -0.8em;">Fig. SAR to Optical</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. Optical to Translated SAR</figcaption>
 							</figure>
 						</div>
 						<div style="width: 50%">
 							<figure align="center">
 								<img style="width: 80%" src="resources/cyclegan_sar_sar.png">
-								<figcaption style="margin-top: -0.8em;">Fig. Optical to SAR</figcaption>
+								<figcaption style="margin-top: -0.8em;">Fig. SAR to Translated Optical</figcaption>
 							</figure>
 						</div>
 					</div>
@@ -210,7 +210,10 @@
 					</div>
 
 					<br><br>
-					Improvment of 10% in the number of matching keypoints after adaptation compared to image translation
+					<p data-markdown style="text-align: left">
+						* Improvment of 10% in the number of matching keypoints after adaptation compared to image translation
+						* Still does not allow to recover translation
+					</p>
 				</section>
 
 				<section>
@@ -219,51 +222,58 @@
 					<div style="display: flex;">
 						<div style="width: 50%">
 							<p data-markdown style="text-align: left">
+								* Special case of spatial despeckling
+
 								* Inspired from [1]
 									* Bilateral filtering using both optical and SAR luminance
 
 								* Texture-descriptor based on [2]
 									* 1st and 2nd order statistics computed on neighborhood of each pixel (radius r)
 									* Unnormalized bilateral filtering of the descriptor
-									* K-Means or distance metric
+								
+								* Filtering procedure = Spatial average 
+									* K-Means
+									* Distance metric
+							</p>
+
+							<hr>
+							<p data-markdown style="text-align: left; font-size:20px">
+								[1] [SAR despeckling guided by an optical image, Verdoliva et al., 2014](https://ieeexplore.ieee.org/document/6947286)
+
+								[2] [Local texture-based color transfer and colorization, Arbelot et al., 2016](https://hal.science/hal-01246615/file/RR-8834.pdf)
 							</p>
 						</div>
 
 						<div style="width: 50%">
 							<figure>
-								<img style="width: 70%" src="resources/despeckling_workflow.png">
+								<img style="width: 90%" src="resources/despeckling_workflow.png">
 								<figcaption>Fig. Workflow if the optical-guided despeckling process</figcaption>
 							</figure>
 						</div>
 					</div>
-
-					<hr>
-					<p data-markdown style="text-align: left; font-size:20px">
-						[1] [SAR despeckling guided by an optical image, Verdoliva et al., 2014](https://ieeexplore.ieee.org/document/6947286)
-
-						[2] [Local texture-based color transfer and colorization, Arbelot et al., 2016](https://hal.science/hal-01246615/file/RR-8834.pdf)
-					</p>
 				</section>
 
 				<section>
 					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Despeckling</p></h2><hr>
 
-					<figure>
-						<img style="width: 100%" src="resources/despeckling_kmeans.png">
-						<figcaption style="margin-top: -0.8em;">Fig. Optical-guided despeckling using K-means. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
-					</figure>
-				</section>
-
-				<section>
-					<h2 class='slide-title' align="left"><p style="color:#9ecdff">Despeckling</p></h2><hr>
-
-					<figure>
-						<img style="width: 100%" src="resources/despeckling_filtered.png">
-						<figcaption style="margin-top: -0.8em;">Fig. Optical-guided despeckling using distance metric. From left to right: optical, SAR, filtered SAR, filtered and colorised SAR.</figcaption>
-					</figure>
-
-					\[ \begin{aligned} \mathcal{D}_{\sigma_d}(p, q) &amp; =  \exp{\left(-\dfrac{||S(p)-S(q)||^2}{2 \sigma_d^2}\right)} \\
-					\mu(p) &amp; =  Z^{-1} \sum_{q} L_{SAR}(q) \mathcal{D}_{\sigma_d}(p, q) \end{aligned} \]
+					<div style="display: flex;">
+						<div style="width: 70%">
+							<figure>
+								<img style="width: 100%" src="resources/despeckling_filtered.png">
+							</figure>
+						</div>
+						<div style="width: 30%;">
+							<p data-markdown style="text-align: left">
+								Top left to bottom right:
+								* Optical
+								* SAR
+								* SAR filtered using the SAR luminance
+								* SAR filtered using the optical luminance
+								* SAR filtered using the both luminances
+								* SAR filtered and colorised
+							</p>
+						</div>
+					</div>
 				</section>
 
 				<section>
