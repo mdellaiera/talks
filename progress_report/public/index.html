@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation</title>
+
+		<meta name="description" content="2024">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides" style="font-size:40px">
+
+				<!-- New slide -->
+				<section style="font-size:40px">
+					<br><br><br>
+					<h3 style="color: #ffffff;">Progress Report</h3>
+					<h2 style="color: #a8d2ff;">Research @ NUS on Remote Sensing</h2><br>
+					<div style="color: #ffffff;">Michael Dell'aiera, Koen Mouthaan</div><br>
+
+					<div class="container" style="margin:10px 120px 10px 120px">
+						<div class="title" style="border-radius: 10px; background-color:rgb(255, 255, 255, 1);">
+							<img src="resources/logos/logo_nus.png" style="height: 100px;"/>
+							<!-- <img src="resources/logos/logo_dso.png" style="height: 100px;"/> -->
+						</div>
+					</div>
+
+					<div style="color: #ffffff;">Sep. 17th, 2025</div>
+					<div style="color: #ffffff;">mda@nus.edu.sg</div>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' style="color:#9ecdff" align="left">Outline</h2><hr>
+
+					Ongoing Projects
+					<p data-markdown style="text-align: left">
+						* Texture-Based Optical-Guided SAR Despeckling
+						* SAR and Optical Image Registration (with Angela and Terry)
+						* BubbleScan: Plasma Bubble Characterization (with Hugo and Harsha)
+						* Mangrove Analysis with Remote Sensing (with Alexandre)
+					</p>
+					<br>
+					New Projects
+					<p data-markdown style="text-align: left">
+						* NERF (with Chengfang and Jeremy)
+						* DPD (with Peizhuo and Haozi)
+						* Complex-Valued Neural Network (with CQ students)
+						* Underwater object detection (with Tian Rong and Peizhuo)
+					</p>
+				</section>
+
+				<!-- New slide -->
+				<section>
+					<h2 class='slide-title' style="color:#9ecdff" align="left">Texture-Based Optical-Guided SAR Despeckling</h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 60%">
+							Preliminary Results
+							<figure>
+								<img style="width: 100%" src="resources/despeckling.png">
+							</figure>
+						</div>
+						<div style="width: 40%">
+							Current status
+
+							<p data-markdown style="text-align: left">
+								* Multiple methods have been selected and ready to be tested
+								* One last method (GNLM) is still under development
+								* Only the Results section on the paper is missing
+							</p>
+
+							<br>TODOs
+
+							<p data-markdown style="text-align: left">
+								* Use the Teleos2 data
+									* Perform registration to obtain ground truth
+									* Obtain the co-registered associated optical images
+								* Send a small sample to Fuse-MERLIN authors for comparison
+								
+							</p>
+						</div>
+					</div>
+				</section>
+				
+				<!-- New slide -->
+				 <section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">SAR and Optical Image Registration</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 60%">
+							Methodology
+							<figure>
+								<img style="width: 100%" src="resources/superglue.png">
+							</figure>
+						</div>
+						<div style="width: 40%">
+							Current status
+
+							<p data-markdown style="text-align: left">
+								* Angela and Terry working on separate methods
+								* On my side: SuperGlue + Domain Adaptation
+							</p>
+
+							<br>TODOs
+
+							<p data-markdown style="text-align: left">
+								* Integrate domain adaptation module into the SuperGlue network
+								* Gather a collection of state-of-the-art methods for comparison
+								* Understand when image registration is actually relevant
+							</p>
+						</div>
+					</div>
+
+					<hr>
+					<p data-markdown style="text-align: left; font-size:20px">
+						[1] [SuperGlue: Learning Feature Matching with Graph Neural Networks, Sarlin et al., 2020](https://psarlin.com/superglue/)
+					</p>
+				</section>
+
+				<section>
+					<h2 class='slide-title' align="left"><p style="color:#9ecdff">BubbleScan: Plasma Bubble Characterization</p></h2><hr>
+
+					<div style="display: flex;">
+						<div style="width: 60%">
+							Methodology
+							<figure>
+								<img style="width: 100%" src="resources/bubblescan.png">
+							</figure>
+						</div>
+						<div style="width: 40%">
+							Current status
+
+							<p data-markdown style="text-align: left">
+								* Work with Hugo on the analysis
+								* Functional but not fully automated (a few manual thresholds)
+								* Some bugs reported (e.g. fail of convergence, sum of Gaussians)
+							</p>
+
+							<br>TODOs
+
+							<p data-markdown style="text-align: left">
+								* Improve automation (reduce manual thresholds)
+								* Fix reported bugs
+								* Analyze all the data and check the results
+							</p>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<!-- To add color to code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				progress: true,
+				width: 1920,
+  				height: 1080,
+				center: false,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+			});
+		</script>
+	</body>
+</html>
